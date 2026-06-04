@@ -34,6 +34,17 @@ class AuthController extends Controller
 
         /** @var \App\Models\User $user */
         $user = Auth::user();
+
+        if ($user->hasRole('admin')) {
+            // Logout admin dari sesi API
+            Auth::logout();
+            return response()->json([
+                'success' => false,
+                'message' => 'Akses ditolak: Akun Admin tidak diizinkan masuk melalui aplikasi mobile. Silakan gunakan versi web di browser untuk mengakses menu Admin yang lengkap.',
+                'data' => null
+            ], 403);
+        }
+
         $token = $user->createToken('MobileAppToken')->plainTextToken;
 
         return response()->json([

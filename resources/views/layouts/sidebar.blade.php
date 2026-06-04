@@ -140,5 +140,17 @@
                 </a>
             </li>
         @endif
+
+        @if (Auth::user()->hasAnyRole(['manager', 'staff']))
+            <li class="menu-header small text-uppercase">
+                <span class="menu-header-text">Aplikasi Mobile</span>
+            </li>
+            <li class="menu-item">
+                <a href="{{ asset('Syncbudget-Mobile-Release.apk') }}" class="menu-link" download>
+                    <i class="menu-icon tf-icons bx bx-mobile"></i>
+                    <div data-i18n="Unduh APK">Unduh APK</div>
+                </a>
+            </li>
+        @endif
     </ul>
 </aside>
