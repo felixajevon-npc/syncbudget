@@ -14,7 +14,12 @@ class BudgetSeeder extends Seeder
 {
     public function run(): void
     {
-        $divisions = Division::all()->keyBy('name');
+        $divIT = Division::where('name', 'IT & Development')->first();
+        $divKeuangan = Division::where('name', 'Keuangan')->first();
+        $divOperasional = Division::where('name', 'Operasional')->first();
+        $divHRD = Division::where('name', 'HRD')->first();
+        $divPemasaran = Division::where('name', 'Pemasaran')->first();
+        $divCS = Division::where('name', 'Customer Service')->first();
 
         $adminUser = User::first();
 
@@ -36,61 +41,95 @@ class BudgetSeeder extends Seeder
         $catTaktis = BudgetCategory::firstOrCreate(['code' => 'FIN-01'], ['name' => 'Dana Taktis']);
         $catOps = BudgetCategory::firstOrCreate(['code' => 'OPS-01'], ['name' => 'Operasional Cabang']);
         $catHR = BudgetCategory::firstOrCreate(['code' => 'HR-01'], ['name' => 'Pengembangan SDM']);
-        $catMkt = BudgetCategory::firstOrCreate(['code' => 'MKT-01'], ['name' => 'Promosi & Iklan']);
-        $catLegal = BudgetCategory::firstOrCreate(['code' => 'LEG-01'], ['name' => 'Legal & Perizinan']);
-        $catRnD = BudgetCategory::firstOrCreate(['code' => 'RND-01'], ['name' => 'Riset & Eksperimen']);
-        $catCS = BudgetCategory::firstOrCreate(['code' => 'CS-01'], ['name' => 'Layanan Pelanggan']);
+        $catMkt = BudgetCategory::firstOrCreate(['code' => 'MKT-01'], ['name' => 'Pemasaran & Iklan']);
 
-        $budgets = [];
-        
-        $addBudget = function($divName, $catId, $name, $total, $used, $start, $end) use (&$budgets, $divisions, $fiscalYear, $adminUser) {
-            $div = $divisions->get($divName);
-            if ($div) {
-                $budgets[] = [
+        if ($divIT && $divKeuangan && $divOperasional && $divHRD) {
+            $budgets = [
+                [
                     'fiscal_year_id' => $fiscalYear->id,
-                    'budget_category_id' => $catId,
-                    'division_id' => $div->id,
-                    'name' => $name,
-                    'total_amount' => $total,
-                    'used_amount' => 0, // Direset ke 0, akan diisi presisi oleh ReimbursementSeeder
-                    'start_date' => $start,
-                    'end_date' => $end,
+                    'budget_category_id' => $catIT->id,
+                    'division_id' => $divIT->id,
+                    'name' => 'Anggaran IT & Infrastruktur Q1 2026',
+                    'total_amount' => 50000000,
+                    'used_amount' => 0,
+                    'start_date' => '2026-01-01',
+                    'end_date' => '2026-03-31',
                     'created_by' => $adminUser->id,
-                ];
+                ],
+                [
+                    'fiscal_year_id' => $fiscalYear->id,
+                    'budget_category_id' => $catTaktis->id,
+                    'division_id' => $divKeuangan->id,
+                    'name' => 'Dana Taktis Keuangan 2026',
+                    'total_amount' => 100000000,
+                    'used_amount' => 0,
+                    'start_date' => '2026-01-01',
+                    'end_date' => '2026-12-31',
+                    'created_by' => $adminUser->id,
+                ],
+                [
+                    'fiscal_year_id' => $fiscalYear->id,
+                    'budget_category_id' => $catOps->id,
+                    'division_id' => $divOperasional->id,
+                    'name' => 'Anggaran Operasional Cabang 2026',
+                    'total_amount' => 250000000,
+                    'used_amount' => 0,
+                    'start_date' => '2026-01-01',
+                    'end_date' => '2026-12-31',
+                    'created_by' => $adminUser->id,
+                ],
+                [
+                    'fiscal_year_id' => $fiscalYear->id,
+                    'budget_category_id' => $catOps->id,
+                    'division_id' => $divOperasional->id,
+                    'name' => 'Anggaran Maintenance Q2',
+                    'total_amount' => 50000000,
+                    'used_amount' => 0,
+                    'start_date' => '2026-04-01',
+                    'end_date' => '2026-06-30',
+                    'created_by' => $adminUser->id,
+                ],
+                [
+                    'fiscal_year_id' => $fiscalYear->id,
+                    'budget_category_id' => $catHR->id,
+                    'division_id' => $divHRD->id,
+                    'name' => 'Anggaran Rekrutmen & Pelatihan',
+                    'total_amount' => 85000000,
+                    'used_amount' => 0,
+                    'start_date' => '2026-01-01',
+                    'end_date' => '2026-12-31',
+                    'created_by' => $adminUser->id,
+                ],
+                [
+                    'fiscal_year_id' => $fiscalYear->id,
+                    'budget_category_id' => $catMkt->id,
+                    'division_id' => $divPemasaran->id ?? $divOperasional->id,
+                    'name' => 'Kampanye Digital Q1',
+                    'total_amount' => 120000000,
+                    'used_amount' => 0,
+                    'start_date' => '2026-01-01',
+                    'end_date' => '2026-03-31',
+                    'created_by' => $adminUser->id,
+                ],
+                [
+                    'fiscal_year_id' => $fiscalYear->id,
+                    'budget_category_id' => $catOps->id,
+                    'division_id' => $divCS->id ?? $divOperasional->id,
+                    'name' => 'Peningkatan Layanan Pelanggan',
+                    'total_amount' => 45000000,
+                    'used_amount' => 0,
+                    'start_date' => '2026-01-01',
+                    'end_date' => '2026-12-31',
+                    'created_by' => $adminUser->id,
+                ],
+            ];
+
+            foreach ($budgets as $budgetData) {
+                Budget::firstOrCreate(
+                    ['name' => $budgetData['name']],
+                    $budgetData
+                );
             }
-        };
-
-        // IT
-        $addBudget('IT & Development', $catIT->id, 'Anggaran IT & Infrastruktur Q1 2026', 50000000, 12500000, '2026-01-01', '2026-03-31');
-        $addBudget('IT & Development', $catIT->id, 'Lisensi Software Tahunan', 150000000, 140000000, '2026-01-01', '2026-12-31');
-        
-        // Keuangan
-        $addBudget('Keuangan', $catTaktis->id, 'Dana Taktis Keuangan 2026', 100000000, 85000000, '2026-01-01', '2026-12-31');
-        $addBudget('Keuangan', $catOps->id, 'Operasional Divisi Keuangan Q1', 20000000, 5000000, '2026-01-01', '2026-03-31');
-
-        // Operasional
-        $addBudget('Operasional', $catOps->id, 'Anggaran Operasional Cabang', 200000000, 120000000, '2026-01-01', '2026-12-31');
-        $addBudget('Operasional', $catOps->id, 'Pemeliharaan Gedung Q2', 75000000, 10000000, '2026-04-01', '2026-06-30');
-
-        // HRD
-        $addBudget('HRD', $catHR->id, 'Anggaran Rekrutmen & Pelatihan', 75000000, 15000000, '2026-01-01', '2026-06-30');
-        $addBudget('HRD', $catOps->id, 'Kesejahteraan Karyawan', 120000000, 30000000, '2026-01-01', '2026-12-31');
-
-        // Pemasaran & Penjualan
-        $addBudget('Pemasaran', $catMkt->id, 'Kampanye Digital Q1', 80000000, 75000000, '2026-01-01', '2026-03-31');
-        $addBudget('Pemasaran', $catMkt->id, 'Event Pameran Nasional', 150000000, 0, '2026-07-01', '2026-09-30');
-        $addBudget('Penjualan', $catOps->id, 'Biaya Perjalanan Dinas Sales', 100000000, 45000000, '2026-01-01', '2026-12-31');
-
-        // Legal & CS & R&D
-        $addBudget('Legal & Compliance', $catLegal->id, 'Perpanjangan Izin Usaha', 30000000, 25000000, '2026-01-01', '2026-12-31');
-        $addBudget('Customer Service', $catCS->id, 'Peningkatan Layanan Pelanggan', 40000000, 12000000, '2026-01-01', '2026-12-31');
-        $addBudget('Riset & Pengembangan', $catRnD->id, 'Prototipe Produk Baru', 250000000, 180000000, '2026-01-01', '2026-12-31');
-
-        foreach ($budgets as $budgetData) {
-            Budget::firstOrCreate(
-                ['name' => $budgetData['name']],
-                $budgetData
-            );
         }
     }
 }
