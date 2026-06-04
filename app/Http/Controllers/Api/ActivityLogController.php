@@ -23,7 +23,7 @@ class ActivityLogController extends Controller
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
-        $query = Activity::with('causer');
+        $query = Activity::with(['causer', 'subject']);
 
         if ($startDate) {
             $query->whereDate('created_at', '>=', $startDate);
@@ -43,7 +43,7 @@ class ActivityLogController extends Controller
             });
         }
 
-        $logs = $query->latest()->paginate(10);
+        $logs = $query->latest()->get();
 
         return response()->json([
             'success' => true,
