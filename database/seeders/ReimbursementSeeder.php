@@ -12,85 +12,110 @@ class ReimbursementSeeder extends Seeder
 {
     public function run(): void
     {
-        $data = [
-            ['div' => 'Operasional', 'title' => 'Pembelian Kertas HVS & Tinta Printer', 'desc' => 'Untuk keperluan cetak laporan bulanan operasional cabang.', 'amount' => 1500000, 'status' => 'approved', 'reject_reason' => null],
-            ['div' => 'Operasional', 'title' => 'Sewa Mobil Dinas Luar Kota', 'desc' => 'Kunjungan survei lapangan ke klien di Surabaya.', 'amount' => 3500000, 'status' => 'rejected', 'reject_reason' => 'Gunakan kendaraan operasional kantor yang sudah tersedia, tidak perlu sewa.'],
-            ['div' => 'Operasional', 'title' => 'Restock Kopi & Snack Pantri', 'desc' => 'Kebutuhan konsumsi bulanan karyawan operasional.', 'amount' => 800000, 'status' => 'pending', 'reject_reason' => null],
-            ['div' => 'HRD', 'title' => 'Biaya Iklan Lowongan Kerja Premium', 'desc' => 'Pemasangan iklan loker di portal Jobstreet untuk 3 posisi IT.', 'amount' => 2500000, 'status' => 'approved', 'reject_reason' => null],
-            ['div' => 'HRD', 'title' => 'Konsumsi Training Karyawan Baru', 'desc' => 'Makan siang untuk 15 peserta onboarding batch maret.', 'amount' => 1200000, 'status' => 'pending', 'reject_reason' => null],
-            ['div' => 'HRD', 'title' => 'Sewa Ruangan Hotel untuk Workshop', 'desc' => 'Training kepemimpinan manajerial.', 'amount' => 5000000, 'status' => 'approved', 'reject_reason' => null],
-            ['div' => 'IT & Development', 'title' => 'Langganan Server AWS Bulanan', 'desc' => 'Tagihan cloud infrastructure bulan berjalan.', 'amount' => 8500000, 'status' => 'approved', 'reject_reason' => null],
-            ['div' => 'IT & Development', 'title' => 'Pembelian Lisensi IDE JetBrains', 'desc' => 'Lisensi tahunan untuk 5 developer.', 'amount' => 12000000, 'status' => 'approved', 'reject_reason' => null],
-            ['div' => 'IT & Development', 'title' => 'Penggantian Keyboard Mekanik Rusak', 'desc' => 'Keyboard fasilitas kantor untuk tim frontend.', 'amount' => 1500000, 'status' => 'rejected', 'reject_reason' => 'Bisa menggunakan stok keyboard standar di gudang.'],
-            ['div' => 'Keuangan', 'title' => 'Biaya Konsultan Pajak Tahunan', 'desc' => 'Konsultasi penyusunan SPT Badan.', 'amount' => 15000000, 'status' => 'approved', 'reject_reason' => null],
-            ['div' => 'Keuangan', 'title' => 'Langganan Software Akuntansi Jurnal', 'desc' => 'Perpanjangan paket enterprise.', 'amount' => 6000000, 'status' => 'pending', 'reject_reason' => null],
-            ['div' => 'Pemasaran', 'title' => 'Biaya Ads Facebook & Instagram', 'desc' => 'Kampanye produk baru selama 2 minggu.', 'amount' => 20000000, 'status' => 'approved', 'reject_reason' => null],
-            ['div' => 'Pemasaran', 'title' => 'Cetak Brosur & Banner Event', 'desc' => 'Materi promosi untuk pameran JCC.', 'amount' => 4500000, 'status' => 'approved', 'reject_reason' => null],
-            ['div' => 'Pemasaran', 'title' => 'Sewa Jasa Influencer Lokal', 'desc' => 'Endorsement video TikTok 1 menit.', 'amount' => 10000000, 'status' => 'rejected', 'reject_reason' => 'Harga terlalu tinggi, cari alternatif influencer lain.'],
-            ['div' => 'Customer Service', 'title' => 'Langganan Zendesk Customer Support', 'desc' => 'Biaya platform tiket bantuan.', 'amount' => 7500000, 'status' => 'approved', 'reject_reason' => null],
-            ['div' => 'Customer Service', 'title' => 'Pembelian Headset Noise Cancelling', 'desc' => 'Peralatan untuk agen call center.', 'amount' => 3000000, 'status' => 'pending', 'reject_reason' => null],
-            ['div' => 'Legal & Compliance', 'title' => 'Perpanjangan Izin Domisili Usaha', 'desc' => 'Pengurusan perizinan ke kelurahan dan kecamatan.', 'amount' => 2500000, 'status' => 'approved', 'reject_reason' => null],
-            ['div' => 'Legal & Compliance', 'title' => 'Biaya Notaris Perubahan Akta', 'desc' => 'Penyesuaian anggaran dasar perusahaan.', 'amount' => 8000000, 'status' => 'pending', 'reject_reason' => null],
-            ['div' => 'Riset & Pengembangan', 'title' => 'Pembelian Komponen IoT Prototipe', 'desc' => 'Sensor suhu dan modul WiFi untuk proyek Smart Office.', 'amount' => 4000000, 'status' => 'approved', 'reject_reason' => null],
-            ['div' => 'Riset & Pengembangan', 'title' => 'Biaya Uji Lab Independen', 'desc' => 'Pengujian keamanan bahan material.', 'amount' => 12000000, 'status' => 'pending', 'reject_reason' => null],
-            ['div' => 'Penjualan', 'title' => 'Entertainment Klien VIP', 'desc' => 'Makan malam bersama prospek klien besar di restoran bintang 5.', 'amount' => 3500000, 'status' => 'approved', 'reject_reason' => null],
-            ['div' => 'Penjualan', 'title' => 'Tiket Pesawat Jakarta-Bali', 'desc' => 'Perjalanan dinas tim sales untuk pitch project.', 'amount' => 5000000, 'status' => 'rejected', 'reject_reason' => 'Project di Bali belum fix, tunda perjalanan dinas.'],
-            ['div' => 'Operasional', 'title' => 'Service AC Kantor Rutin', 'desc' => 'Cuci 10 unit AC di lantai 2 dan 3.', 'amount' => 1000000, 'status' => 'approved', 'reject_reason' => null],
-            ['div' => 'IT & Development', 'title' => 'Upgrade RAM Server On-Premise', 'desc' => 'Pembelian 2 keping RAM 32GB ECC.', 'amount' => 6000000, 'status' => 'approved', 'reject_reason' => null],
-            ['div' => 'HRD', 'title' => 'Paket Medical Check Up Karyawan', 'desc' => 'Cek kesehatan tahunan untuk 50 staf.', 'amount' => 25000000, 'status' => 'approved', 'reject_reason' => null],
-            ['div' => 'Pemasaran', 'title' => 'Pembelian Merchandise Kaos & Mug', 'desc' => 'Souvenir untuk pelanggan setia akhir tahun.', 'amount' => 15000000, 'status' => 'pending', 'reject_reason' => null],
-            ['div' => 'Keuangan', 'title' => 'Pembelian Brankas Baru', 'desc' => 'Brankas anti api ukuran sedang.', 'amount' => 4500000, 'status' => 'approved', 'reject_reason' => null],
-            ['div' => 'Customer Service', 'title' => 'Gathering Internal Tim CS', 'desc' => 'Makan bersama tim bulanan untuk bonding.', 'amount' => 2000000, 'status' => 'rejected', 'reject_reason' => 'Budget bonding dialihkan ke event company outing tahunan.'],
-            ['div' => 'Legal & Compliance', 'title' => 'Buku Referensi Hukum Terbaru', 'desc' => 'Pembelian buku KUHP dan perdata edisi revisi.', 'amount' => 500000, 'status' => 'approved', 'reject_reason' => null],
-            ['div' => 'Penjualan', 'title' => 'Sewa Booth Pameran B2B', 'desc' => 'Pameran industri manufaktur di JIExpo.', 'amount' => 35000000, 'status' => 'approved', 'reject_reason' => null],
-            ['div' => 'Riset & Pengembangan', 'title' => 'Buku Jurnal Akses Berbayar', 'desc' => 'Langganan IEEE Xplore untuk 1 bulan.', 'amount' => 1500000, 'status' => 'pending', 'reject_reason' => null],
+        $mainStaff = User::where('email', 'staff@syncbudget.com')->first();
+        $mainManager = User::where('email', 'manager@syncbudget.com')->first();
+        if (!$mainStaff || !$mainManager) return;
+
+        // Templates for Operasional
+        $opsTemplates = [
+            ['title' => 'Pembelian Alat Tulis Kantor', 'desc' => 'Kebutuhan ATK cabang', 'amount' => 1500000],
+            ['title' => 'Sewa Mobil Dinas', 'desc' => 'Kunjungan dinas luar kota', 'amount' => 3500000],
+            ['title' => 'Restock Kopi & Snack', 'desc' => 'Konsumsi bulanan pantry', 'amount' => 800000],
+            ['title' => 'Service AC Rutin', 'desc' => 'Perawatan rutin AC kantor', 'amount' => 1200000],
+            ['title' => 'Beli Kursi Ergonomis', 'desc' => 'Penggantian kursi rusak', 'amount' => 2500000],
+            ['title' => 'Tagihan Internet', 'desc' => 'Pembayaran ISP cabang', 'amount' => 3000000],
+            ['title' => 'Biaya Kurir & Ekspedisi', 'desc' => 'Pengiriman dokumen penting', 'amount' => 500000],
+            ['title' => 'Pembelian Air Galon', 'desc' => 'Stok air minum bulanan', 'amount' => 450000],
+            ['title' => 'Perbaikan Pintu Kaca', 'desc' => 'Kaca lobi retak', 'amount' => 1800000],
+            ['title' => 'Cetak Brosur & Spanduk', 'desc' => 'Materi operasional', 'amount' => 2200000],
+            ['title' => 'Pembelian Tinta Printer', 'desc' => 'Stok tinta warna dan hitam', 'amount' => 950000],
+            ['title' => 'Sewa Proyektor Tambahan', 'desc' => 'Meeting koordinasi triwulan', 'amount' => 1100000],
         ];
 
-        DB::transaction(function () use ($data) {
-            foreach ($data as $item) {
-                // Cari divisi berdasarkan nama
-                $division = \App\Models\Division::where('name', $item['div'])->first();
-                if (!$division) continue;
+        $reimbursementsToCreate = [];
 
-                // Cari staf secara acak di divisi ini
-                $staff = User::where('division_id', $division->id)->whereHas('roles', function($q) {
-                    $q->where('name', 'staff');
-                })->inRandomOrder()->first();
+        // Generate 45 items for main staff
+        for ($i = 1; $i <= 45; $i++) {
+            $tpl = $opsTemplates[array_rand($opsTemplates)];
+            $statusOptions = ['approved', 'approved', 'approved', 'rejected', 'rejected', 'pending', 'pending'];
+            $status = $statusOptions[array_rand($statusOptions)];
+            
+            $reimbursementsToCreate[] = [
+                'user' => $mainStaff,
+                'title' => $tpl['title'] . ' Batch ' . $i,
+                'desc' => $tpl['desc'],
+                'amount' => $tpl['amount'] + rand(1, 9) * 100000,
+                'status' => $status,
+                'manager' => $mainManager,
+            ];
+        }
 
-                if (!$staff) continue;
+        // Add 15 "figuran" items for other users
+        $otherStaffs = User::where('email', '!=', 'staff@syncbudget.com')->whereHas('roles', function($q) { $q->where('name', 'staff'); })->get();
+        if ($otherStaffs->count() > 0) {
+            for ($i = 1; $i <= 15; $i++) {
+                $staff = $otherStaffs->random();
+                $reimbursementsToCreate[] = [
+                    'user' => $staff,
+                    'title' => 'Pengeluaran Divisi ' . $i,
+                    'desc' => 'Kebutuhan divisi untuk staf',
+                    'amount' => rand(5, 50) * 100000,
+                    'status' => ['approved', 'rejected', 'pending'][rand(0, 2)],
+                    'manager' => $mainManager,
+                ];
+            }
+        }
 
-                // Cari budget yang sesuai untuk divisi ini
-                $budget = Budget::where('division_id', $division->id)->inRandomOrder()->first();
+        DB::transaction(function () use ($reimbursementsToCreate) {
+            $budgetUsage = []; // track usage per budget ID
+
+            foreach ($reimbursementsToCreate as $item) {
+                $staff = $item['user'];
+                $budget = Budget::where('division_id', $staff->division_id)->inRandomOrder()->first();
                 if (!$budget) continue;
 
-                // Cari manajer yang mengelola divisi ini
-                $manager = User::whereHas('managedDivisions', function($q) use ($division) {
-                    $q->where('divisions.id', $division->id);
-                })->inRandomOrder()->first();
-
-                // Jika tidak ada manajer spesifik, fallback ke manajer mana saja
-                if (!$manager) {
-                    $manager = User::whereHas('roles', function($q) {
-                        $q->where('name', 'manager');
-                    })->first();
+                if (!isset($budgetUsage[$budget->id])) {
+                    $budgetUsage[$budget->id] = 0; // Berawal dari 0 sesuai BudgetSeeder
                 }
 
-                $reimbursement = Reimbursement::firstOrCreate(
+                $status = $item['status'];
+                $amount = $item['amount'];
+
+                // Mathematical cap logic (Max ~75%)
+                if ($status === 'approved') {
+                    $projectedUsage = $budgetUsage[$budget->id] + $amount;
+                    $cap = $budget->total_amount * 0.75; 
+                    if ($projectedUsage > $cap) {
+                        // Switch to pending or rejected if it exceeds 75% budget
+                        $status = rand(0, 1) ? 'pending' : 'rejected';
+                    } else {
+                        $budgetUsage[$budget->id] = $projectedUsage;
+                    }
+                }
+
+                $reason = null;
+                if ($status === 'rejected') {
+                    $reasons = ['Budget sudah dialokasikan ke pos lain', 'Mohon sesuaikan dengan SOP', 'Harap lengkapi kuitansi', 'Gunakan vendor rekanan kantor', 'Ditolak karena tidak mendesak'];
+                    $reason = $reasons[array_rand($reasons)];
+                }
+
+                Reimbursement::firstOrCreate(
                     ['title' => $item['title']],
                     [
                         'user_id' => $staff->id,
                         'budget_id' => $budget->id,
                         'description' => $item['desc'],
-                        'amount' => $item['amount'],
-                        'status' => $item['status'],
-                        'action_by' => in_array($item['status'], ['approved', 'rejected']) && $manager ? $manager->id : null,
-                        'rejection_reason' => $item['reject_reason'],
+                        'amount' => $amount,
+                        'status' => $status,
+                        'action_by' => in_array($status, ['approved', 'rejected']) ? $item['manager']->id : null,
+                        'rejection_reason' => $reason,
                     ]
                 );
+            }
 
-                if ($reimbursement->wasRecentlyCreated && $reimbursement->status === 'approved') {
-                    $budget->lockForUpdate()->increment('used_amount', $reimbursement->amount);
-                }
+            // After loop, bulk update budgets to exact used_amounts
+            foreach ($budgetUsage as $budgetId => $usedAmount) {
+                Budget::where('id', $budgetId)->update(['used_amount' => $usedAmount]);
             }
         });
     }

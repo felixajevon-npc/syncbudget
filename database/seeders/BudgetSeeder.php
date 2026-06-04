@@ -52,7 +52,7 @@ class BudgetSeeder extends Seeder
                     'division_id' => $div->id,
                     'name' => $name,
                     'total_amount' => $total,
-                    'used_amount' => $used,
+                    'used_amount' => 0, // Direset ke 0, akan diisi presisi oleh ReimbursementSeeder
                     'start_date' => $start,
                     'end_date' => $end,
                     'created_by' => $adminUser->id,
