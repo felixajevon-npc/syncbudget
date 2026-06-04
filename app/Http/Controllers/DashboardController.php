@@ -27,13 +27,18 @@ class DashboardController extends Controller
         $recentReimbursements = Reimbursement::with('user.division')->latest()->take(5)->get();
         $recentLogs = Activity::with('causer')->latest()->take(5)->get();
 
+        $driver = DB::connection()->getDriverName();
+        $monthQuery = $driver === 'sqlite' 
+            ? "strftime('%m', updated_at)" 
+            : "EXTRACT(MONTH FROM updated_at)";
+
         $monthlyData = Reimbursement::select(
-            DB::raw('EXTRACT(MONTH FROM updated_at) as month'),
+            DB::raw("$monthQuery as month"),
             DB::raw('SUM(amount) as total')
         )
             ->where('status', 'approved')
             ->whereYear('updated_at', date('Y'))
-            ->groupBy(DB::raw('EXTRACT(MONTH FROM updated_at)'))
+            ->groupBy(DB::raw($monthQuery))
             ->orderBy('month')
             ->get();
 
