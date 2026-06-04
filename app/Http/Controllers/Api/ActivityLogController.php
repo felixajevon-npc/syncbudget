@@ -43,7 +43,7 @@ class ActivityLogController extends Controller
             });
         }
 
-        $logs = $query->latest()->get();
+        $logs = $query->latest()->paginate(10);
 
         return response()->json([
             'success' => true,
